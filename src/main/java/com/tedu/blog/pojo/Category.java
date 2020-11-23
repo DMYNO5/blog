@@ -10,7 +10,7 @@ import java.util.Date;
 public class Category implements Serializable {
     private Integer categoryId;
 
-    private String describe;
+    private String described;
 
     private Date createdTime;
 
@@ -26,12 +26,12 @@ public class Category implements Serializable {
         this.categoryId = categoryId;
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDescribed() {
+        return described;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe;
+    public void setDescribed(String described) {
+        this.described = described;
     }
 
     public Date getCreatedTime() {
@@ -63,7 +63,7 @@ public class Category implements Serializable {
         }
         Category other = (Category) that;
         return (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
-            && (this.getDescribe() == null ? other.getDescribe() == null : this.getDescribe().equals(other.getDescribe()))
+            && (this.getDescribed() == null ? other.getDescribed() == null : this.getDescribed().equals(other.getDescribed()))
             && (this.getCreatedTime() == null ? other.getCreatedTime() == null : this.getCreatedTime().equals(other.getCreatedTime()))
             && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()));
     }
@@ -73,7 +73,7 @@ public class Category implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
-        result = prime * result + ((getDescribe() == null) ? 0 : getDescribe().hashCode());
+        result = prime * result + ((getDescribed() == null) ? 0 : getDescribed().hashCode());
         result = prime * result + ((getCreatedTime() == null) ? 0 : getCreatedTime().hashCode());
         result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
         return result;
@@ -86,7 +86,7 @@ public class Category implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", categoryId=").append(categoryId);
-        sb.append(", describe=").append(describe);
+        sb.append(", described=").append(described);
         sb.append(", createdTime=").append(createdTime);
         sb.append(", updateTime=").append(updateTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);

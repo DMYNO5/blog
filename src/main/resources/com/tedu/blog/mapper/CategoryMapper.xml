@@ -3,7 +3,7 @@
 <mapper namespace="com.tedu.blog.mapper.CategoryMapper">
   <resultMap id="BaseResultMap" type="com.tedu.blog.pojo.Category">
     <id column="category_id" jdbcType="INTEGER" property="categoryId" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="described" jdbcType="VARCHAR" property="described" />
     <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -66,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    category_id, `describe`, created_time, update_time
+    category_id, described, created_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.tedu.blog.pojo.CategoryExample" resultMap="BaseResultMap">
     select
@@ -99,16 +99,16 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="category_id" keyProperty="categoryId" parameterType="com.tedu.blog.pojo.Category" useGeneratedKeys="true">
-    insert into category (`describe`, created_time, update_time
+    insert into category (described, created_time, update_time
       )
-    values (#{describe,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+    values (#{described,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" keyColumn="category_id" keyProperty="categoryId" parameterType="com.tedu.blog.pojo.Category" useGeneratedKeys="true">
     insert into category
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="describe != null">
-        `describe`,
+      <if test="described != null">
+        described,
       </if>
       <if test="createdTime != null">
         created_time,
@@ -118,8 +118,8 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
+      <if test="described != null">
+        #{described,jdbcType=VARCHAR},
       </if>
       <if test="createdTime != null">
         #{createdTime,jdbcType=TIMESTAMP},
@@ -141,8 +141,8 @@
       <if test="record.categoryId != null">
         category_id = #{record.categoryId,jdbcType=INTEGER},
       </if>
-      <if test="record.describe != null">
-        `describe` = #{record.describe,jdbcType=VARCHAR},
+      <if test="record.described != null">
+        described = #{record.described,jdbcType=VARCHAR},
       </if>
       <if test="record.createdTime != null">
         created_time = #{record.createdTime,jdbcType=TIMESTAMP},
@@ -158,7 +158,7 @@
   <update id="updateByExample" parameterType="map">
     update category
     set category_id = #{record.categoryId,jdbcType=INTEGER},
-      `describe` = #{record.describe,jdbcType=VARCHAR},
+      described = #{record.described,jdbcType=VARCHAR},
       created_time = #{record.createdTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -168,8 +168,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.tedu.blog.pojo.Category">
     update category
     <set>
-      <if test="describe != null">
-        `describe` = #{describe,jdbcType=VARCHAR},
+      <if test="described != null">
+        described = #{described,jdbcType=VARCHAR},
       </if>
       <if test="createdTime != null">
         created_time = #{createdTime,jdbcType=TIMESTAMP},
@@ -182,7 +182,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.tedu.blog.pojo.Category">
     update category
-    set `describe` = #{describe,jdbcType=VARCHAR},
+    set described = #{described,jdbcType=VARCHAR},
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where category_id = #{categoryId,jdbcType=INTEGER}

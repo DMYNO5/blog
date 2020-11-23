@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.blog.mapper.DataanalysisMapper">
+  <resultMap id="BaseResultMap" type="com.tedu.blog.pojo.Dataanalysis">
+    <id column="data_id" jdbcType="INTEGER" property="dataId" />
+    <result column="whereisday" jdbcType="DATE" property="whereisday" />
+    <result column="user_count" jdbcType="INTEGER" property="userCount" />
+    <result column="comment_count" jdbcType="INTEGER" property="commentCount" />
+    <result column="collection_count" jdbcType="INTEGER" property="collectionCount" />
+    <result column="essay_count" jdbcType="INTEGER" property="essayCount" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    data_id, whereisday, user_count, comment_count, collection_count, essay_count
+  </sql>
+  <select id="selectByExample" parameterType="com.tedu.blog.pojo.DataanalysisExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from dataanalysis
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dataanalysis
+    where data_id = #{dataId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dataanalysis
+    where data_id = #{dataId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.tedu.blog.pojo.DataanalysisExample">
+    delete from dataanalysis
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="data_id" keyProperty="dataId" parameterType="com.tedu.blog.pojo.Dataanalysis" useGeneratedKeys="true">
+    insert into dataanalysis (whereisday, user_count, comment_count, 
+      collection_count, essay_count)
+    values (#{whereisday,jdbcType=DATE}, #{userCount,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, 
+      #{collectionCount,jdbcType=INTEGER}, #{essayCount,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="data_id" keyProperty="dataId" parameterType="com.tedu.blog.pojo.Dataanalysis" useGeneratedKeys="true">
+    insert into dataanalysis
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="whereisday != null">
+        whereisday,
+      </if>
+      <if test="userCount != null">
+        user_count,
+      </if>
+      <if test="commentCount != null">
+        comment_count,
+      </if>
+      <if test="collectionCount != null">
+        collection_count,
+      </if>
+      <if test="essayCount != null">
+        essay_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="whereisday != null">
+        #{whereisday,jdbcType=DATE},
+      </if>
+      <if test="userCount != null">
+        #{userCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCount != null">
+        #{collectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="essayCount != null">
+        #{essayCount,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tedu.blog.pojo.DataanalysisExample" resultType="java.lang.Long">
+    select count(*) from dataanalysis
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update dataanalysis
+    <set>
+      <if test="record.dataId != null">
+        data_id = #{record.dataId,jdbcType=INTEGER},
+      </if>
+      <if test="record.whereisday != null">
+        whereisday = #{record.whereisday,jdbcType=DATE},
+      </if>
+      <if test="record.userCount != null">
+        user_count = #{record.userCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.commentCount != null">
+        comment_count = #{record.commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.collectionCount != null">
+        collection_count = #{record.collectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.essayCount != null">
+        essay_count = #{record.essayCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update dataanalysis
+    set data_id = #{record.dataId,jdbcType=INTEGER},
+      whereisday = #{record.whereisday,jdbcType=DATE},
+      user_count = #{record.userCount,jdbcType=INTEGER},
+      comment_count = #{record.commentCount,jdbcType=INTEGER},
+      collection_count = #{record.collectionCount,jdbcType=INTEGER},
+      essay_count = #{record.essayCount,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.tedu.blog.pojo.Dataanalysis">
+    update dataanalysis
+    <set>
+      <if test="whereisday != null">
+        whereisday = #{whereisday,jdbcType=DATE},
+      </if>
+      <if test="userCount != null">
+        user_count = #{userCount,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        comment_count = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="collectionCount != null">
+        collection_count = #{collectionCount,jdbcType=INTEGER},
+      </if>
+      <if test="essayCount != null">
+        essay_count = #{essayCount,jdbcType=INTEGER},
+      </if>
+    </set>
+    where data_id = #{dataId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.tedu.blog.pojo.Dataanalysis">
+    update dataanalysis
+    set whereisday = #{whereisday,jdbcType=DATE},
+      user_count = #{userCount,jdbcType=INTEGER},
+      comment_count = #{commentCount,jdbcType=INTEGER},
+      collection_count = #{collectionCount,jdbcType=INTEGER},
+      essay_count = #{essayCount,jdbcType=INTEGER}
+    where data_id = #{dataId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="label_id" jdbcType="INTEGER" property="labelId" />
     <result column="essay_id" jdbcType="INTEGER" property="essayId" />
-    <result column="describe" jdbcType="VARCHAR" property="describe" />
+    <result column="described" jdbcType="VARCHAR" property="described" />
     <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, label_id, essay_id, `describe`, created_time, update_time
+    id, label_id, essay_id, described, created_time, update_time
   </sql>
   <select id="selectByExample" parameterType="com.tedu.blog.pojo.LabelExample" resultMap="BaseResultMap">
     select
@@ -109,9 +109,9 @@
     </if>
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.tedu.blog.pojo.Label" useGeneratedKeys="true">
-    insert into label (label_id, essay_id, `describe`, 
+    insert into label (label_id, essay_id, described, 
       created_time, update_time)
-    values (#{labelId,jdbcType=INTEGER}, #{essayId,jdbcType=INTEGER}, #{describe,jdbcType=VARCHAR}, 
+    values (#{labelId,jdbcType=INTEGER}, #{essayId,jdbcType=INTEGER}, #{described,jdbcType=VARCHAR}, 
       #{createdTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.tedu.blog.pojo.Label" useGeneratedKeys="true">
@@ -123,8 +123,8 @@
       <if test="essayId != null">
         essay_id,
       </if>
-      <if test="describe != null">
-        `describe`,
+      <if test="described != null">
+        described,
       </if>
       <if test="createdTime != null">
         created_time,
@@ -140,8 +140,8 @@
       <if test="essayId != null">
         #{essayId,jdbcType=INTEGER},
       </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
+      <if test="described != null">
+        #{described,jdbcType=VARCHAR},
       </if>
       <if test="createdTime != null">
         #{createdTime,jdbcType=TIMESTAMP},
@@ -169,8 +169,8 @@
       <if test="record.essayId != null">
         essay_id = #{record.essayId,jdbcType=INTEGER},
       </if>
-      <if test="record.describe != null">
-        `describe` = #{record.describe,jdbcType=VARCHAR},
+      <if test="record.described != null">
+        described = #{record.described,jdbcType=VARCHAR},
       </if>
       <if test="record.createdTime != null">
         created_time = #{record.createdTime,jdbcType=TIMESTAMP},
@@ -188,7 +188,7 @@
     set id = #{record.id,jdbcType=INTEGER},
       label_id = #{record.labelId,jdbcType=INTEGER},
       essay_id = #{record.essayId,jdbcType=INTEGER},
-      `describe` = #{record.describe,jdbcType=VARCHAR},
+      described = #{record.described,jdbcType=VARCHAR},
       created_time = #{record.createdTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
@@ -204,8 +204,8 @@
       <if test="essayId != null">
         essay_id = #{essayId,jdbcType=INTEGER},
       </if>
-      <if test="describe != null">
-        `describe` = #{describe,jdbcType=VARCHAR},
+      <if test="described != null">
+        described = #{described,jdbcType=VARCHAR},
       </if>
       <if test="createdTime != null">
         created_time = #{createdTime,jdbcType=TIMESTAMP},
@@ -220,7 +220,7 @@
     update label
     set label_id = #{labelId,jdbcType=INTEGER},
       essay_id = #{essayId,jdbcType=INTEGER},
-      `describe` = #{describe,jdbcType=VARCHAR},
+      described = #{described,jdbcType=VARCHAR},
       created_time = #{createdTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
