@@ -1,15 +1,11 @@
 package com.tedu.blog.controller;
 
-
 import com.github.pagehelper.PageInfo;
-import com.tedu.blog.pojo.Essay;
 import com.tedu.blog.pojo.PageResult;
 import com.tedu.blog.pojo.User;
 import com.tedu.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.tedu.blog.pojo.Result;
 

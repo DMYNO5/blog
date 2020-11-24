@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         return pageInfo;
     }
 
+    @Override
     public User selectUserByUserNameAndPassword(String username, String password){
         UserExample example=new UserExample();
         UserExample.Criteria criteria = example.or();
@@ -50,6 +51,12 @@ public class UserServiceImpl implements UserService {
         }else {
             return null;
         }
+    }
+
+    @Override
+    public User updateUser(Integer userId) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        return null;
     }
 
 }
