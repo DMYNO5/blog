@@ -31,5 +31,13 @@ public class EssayController {
         PageResult pageResult = new PageResult(0,"ok");
         pageResult.setPageInfo(pageInfo);
         return pageResult;
+
+    }
+    @RequestMapping("selectByEssay")
+    public PageResult selectByEssay(Integer pageNum,Integer pageSize,Essay essay){
+        PageInfo pageInfo = essayService.selectByEssay(1,10,essay);
+        PageResult pageResult = new PageResult(0,"ok");
+        pageResult.setPageInfo(pageInfo);
+        return pageResult;
     }
 }
