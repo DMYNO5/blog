@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @RestController
 @CrossOrigin
@@ -31,4 +33,18 @@ public class CommentController {
         }
     }
 
+    //贾旭业。根据essayId查出评论对象的list集合
+    @RequestMapping("/selectCommentsByEssayId")
+    public Result selectCommentsByEssayId(Integer essayId){
+        List<Comment> listComment = commentService.selectCommentsByEssayId(essayId);
+        return new Result(0,"ok",listComment);
+    }
+
+
+    //贾旭业。根据essayId查出评论对象的list集合(关联user表)
+    @RequestMapping("/selectCommentsByEssayId2")
+    public Result selectCommentsByEssayId2(Integer essayId){
+        List<Comment> commentList = commentService.selectCommentsByEssayId2(essayId);
+        return new Result(0,"ok",commentList);
+    }
 }

@@ -52,18 +52,5 @@ public class EssayController {
         return new Result(0,"ok",essay);
     }
 
-    //贾旭业。根据essayId查出评论对象的list集合
-    @RequestMapping("/selectCommentsByEssayId")
-    public Result selectCommentsByEssayId(Integer essayId){
-        List<Comment> listComment = essayService.selectCommentsByEssayId(essayId);
-        return new Result(0,"ok",listComment);
-    }
 
-
-    //贾旭业。根据essayId查出评论对象的list集合(关联user表)
-    @RequestMapping("/selectCommentsByEssayId2")
-    public Result selectCommentsByEssayId2(Integer essayId){
-        List<Comment> commentList = essayService.selectCommentsByEssayId2(essayId);
-        return new Result(0,"ok",commentList);
-    }
 }
