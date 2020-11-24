@@ -49,7 +49,12 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.5</version>
         </dependency>
-
+        <!--log4j依赖-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.12</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
