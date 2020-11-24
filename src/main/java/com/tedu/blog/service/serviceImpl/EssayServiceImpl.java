@@ -22,6 +22,14 @@ public class EssayServiceImpl implements EssayService {
     @Autowired(required = false)
     EssayMapper essayMapper;
 
+
+    @Override
+    public int insertEssay( Essay essay) {
+    Integer essays = essayMapper.insert(essay);
+
+        return essays;
+    }
+
     @Override
     public PageInfo<Essay> selectPage(Integer pageNum, Integer pageSize) {
         String orderBy = "created_time desc";
