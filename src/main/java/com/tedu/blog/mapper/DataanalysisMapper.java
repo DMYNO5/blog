@@ -4,7 +4,9 @@ import com.tedu.blog.pojo.Dataanalysis;
 import com.tedu.blog.pojo.DataanalysisExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface DataanalysisMapper {
     long countByExample(DataanalysisExample example);
 

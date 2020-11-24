@@ -4,7 +4,9 @@ import com.tedu.blog.pojo.User;
 import com.tedu.blog.pojo.UserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface UserMapper {
     long countByExample(UserExample example);
 

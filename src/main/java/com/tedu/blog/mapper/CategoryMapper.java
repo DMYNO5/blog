@@ -4,7 +4,9 @@ import com.tedu.blog.pojo.Category;
 import com.tedu.blog.pojo.CategoryExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface CategoryMapper {
     long countByExample(CategoryExample example);
 

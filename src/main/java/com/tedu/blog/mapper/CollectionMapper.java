@@ -4,7 +4,9 @@ import com.tedu.blog.pojo.Collection;
 import com.tedu.blog.pojo.CollectionExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface CollectionMapper {
     long countByExample(CollectionExample example);
 

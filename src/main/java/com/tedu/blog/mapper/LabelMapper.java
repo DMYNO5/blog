@@ -4,7 +4,9 @@ import com.tedu.blog.pojo.Label;
 import com.tedu.blog.pojo.LabelExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface LabelMapper {
     long countByExample(LabelExample example);
 

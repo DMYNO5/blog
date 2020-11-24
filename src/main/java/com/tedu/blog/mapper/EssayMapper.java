@@ -4,7 +4,9 @@ import com.tedu.blog.pojo.Essay;
 import com.tedu.blog.pojo.EssayExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
+@Component
 public interface EssayMapper {
     long countByExample(EssayExample example);
 
