@@ -49,7 +49,7 @@ public class EssayServiceImpl implements EssayService {
             criteria.andEssayIdEqualTo(essay.getEssayId());
         }
         if(!StringUtils.isEmpty(essay.getUserId())){
-            criteria.andUserIdEqualTo(essay.getEssayId());
+            criteria.andUserIdEqualTo(essay.getUserId());
         }
         if(!StringUtils.isEmpty(essay.getTitle())){
             criteria.andTitleEqualTo(essay.getTitle());
