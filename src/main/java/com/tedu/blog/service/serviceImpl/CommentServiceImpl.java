@@ -1,6 +1,7 @@
 package com.tedu.blog.service.serviceImpl;
 
 
+
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tedu.blog.mapper.CommentMapper;
@@ -15,6 +16,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.List;
 
+
 @Service
 public class CommentServiceImpl implements CommentService {
     @Autowired
@@ -22,13 +24,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public PageInfo<Comment> selectByComment(Integer pageNum, Integer pageSize, Comment comment) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         CommentExample commentExample = new CommentExample();
         CommentExample.Criteria criteria = commentExample.createCriteria();
-        if (!StringUtils.isEmpty(comment.getcId())){
+        if (!StringUtils.isEmpty(comment.getcId())) {
             criteria.andCIdEqualTo(comment.getcId());
         }
-        if(!StringUtils.isEmpty(comment.getUserId())){
+        if (!StringUtils.isEmpty(comment.getUserId())) {
             criteria.andUserIdEqualTo(comment.getUserId());
         }
         if (!StringUtils.isEmpty(comment.getEssayId())) {
@@ -37,5 +39,11 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> commentList = commentMapper.selectByExample(commentExample);
         PageInfo pageInfo = new PageInfo(commentList);
         return pageInfo;
+    }
+    @Override
+    public Integer insert(Comment comment) {
+        Integer i = commentMapper.insert(comment);
+        return i;
+
     }
 }

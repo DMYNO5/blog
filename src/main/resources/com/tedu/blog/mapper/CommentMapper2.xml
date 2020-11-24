@@ -1,0 +1,30 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.blog.mapper.CommentMapper2">
+    <resultMap type="com.tedu.blog.pojo.Comment2" id="commentResultMap">
+        <id column="c_id" jdbcType="INTEGER" property="cId" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="essay_id" jdbcType="INTEGER" property="essayId" />
+        <result column="power" jdbcType="INTEGER" property="power" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <collection property="userList" ofType="com.tedu.blog.pojo.User">
+            <id column="user_id" jdbcType="INTEGER" property="userId" />
+            <result column="username" jdbcType="VARCHAR" property="username" />
+            <result column="password" jdbcType="VARCHAR" property="password" />
+            <result column="phone" jdbcType="VARCHAR" property="phone" />
+            <result column="email" jdbcType="VARCHAR" property="email" />
+            <result column="photo" jdbcType="VARCHAR" property="photo" />
+            <result column="power" jdbcType="INTEGER" property="power" />
+            <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+        </collection>
+    </resultMap>
+
+    <select id="selectCommentsByEssayId2" parameterType="Integer" resultMap="commentResultMap">
+		SELECT comment.c_id,comment.user_id,comment.essay_id,comment.power,comment.content,comment.created_time,comment.update_time,
+        user.user_id,user.username,user.password,user.phone,user.email,user.photo,user.power,user.created_time
+        FROM comment,user
+        WHERE comment.essay_id=#{essay_id}  AND comment.user_id=user.user_id;
+	</select>
+
+</mapper>
