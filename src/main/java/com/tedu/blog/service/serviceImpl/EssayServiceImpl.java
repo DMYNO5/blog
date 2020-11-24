@@ -30,6 +30,22 @@ public class EssayServiceImpl implements EssayService {
     @Autowired
     CommentMapper commentMapper;
 
+    @Autowired
+    CommentMapper2 commentMapper2;
+
+    /**
+     * 赵飞宇      新增文章的方法
+      * @param essay
+     * @return
+     */
+    @Override
+    public int insertEssay( Essay essay) {
+    Integer essays = essayMapper.insert(essay);
+
+        return essays;
+    }
+
+
     @Override
     public PageInfo<Essay> selectPage(Integer pageNum, Integer pageSize) {
         String orderBy = "created_time desc";
@@ -97,8 +113,7 @@ public class EssayServiceImpl implements EssayService {
     }
 
 
-    @Autowired
-    CommentMapper2 commentMapper2;
+
 
 
     //贾旭业。根据essayId查出文章对象

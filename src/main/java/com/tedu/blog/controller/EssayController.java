@@ -8,6 +8,7 @@ import com.tedu.blog.pojo.Result;
 import com.tedu.blog.service.EssayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -43,6 +44,24 @@ public class EssayController {
         PageResult pageResult = new PageResult(0,"ok");
         pageResult.setPageInfo(pageInfo);
         return pageResult;
+    }
+
+    /**
+     * 赵飞宇      新增文章的方法
+     * @param essay
+     * @return result
+     */
+    @RequestMapping("/insertEssay")
+    public Result insertEssay( Essay essay) {
+        Result result = null;
+        int hangshu = essayService.insertEssay(essay);
+        if (hangshu > 0) {
+            result = new Result(0, "成功添加一篇文章", essay);
+        }
+        if (hangshu == 0) {
+            result = new Result(500, "添加失败");
+        }
+        return result;
     }
 
     //贾旭业。根据essayId查出文章对象
