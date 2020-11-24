@@ -1,6 +1,8 @@
 package com.tedu.blog.controller;
 
 import com.tedu.blog.pojo.Comment;
+import com.tedu.blog.pojo.PageResult;
+import com.tedu.blog.pojo.User;
 import com.tedu.blog.pojo.Result;
 import com.tedu.blog.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,13 @@ import java.util.List;
 public class CommentController {
     @Autowired
     CommentService commentService;
-
+    @RequestMapping("/selectByComment")
+    public PageResult selectByComment(Integer pageNum, Integer pageSize, Comment comment){
+        PageInfo pageInfo = commentService.selectByComment(1,10,comment);
+        PageResult pageResult = new PageResult(0,"ok");
+        pageResult.setPageInfo(pageInfo);
+        return pageResult;
+    }
     @RequestMapping("/insert")
     public Result insert(Comment comment){
         Integer userId = comment.getUserId();
