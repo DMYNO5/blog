@@ -45,6 +45,31 @@ public class EssayServiceImpl implements EssayService {
         return essays;
     }
 
+    /**
+     * 赵飞宇      通过文章的id删除文章的方法
+     * @param essayId
+     * @return
+     */
+    @Override
+    public int deleteById(Integer essayId) {
+
+        Integer essays = essayMapper.deleteByPrimaryKey(essayId);
+
+        return essays;
+    }
+
+    /**
+     * 赵飞宇      更新文章
+     * @param essay
+     * @return
+     */
+    @Override
+    public int update(Essay essay) {
+
+        Integer essays = essayMapper.updateByPrimaryKeySelective(essay);
+
+        return essays;
+    }
 
     @Override
     public PageInfo<Essay> selectPage(Integer pageNum, Integer pageSize) {
