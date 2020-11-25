@@ -38,6 +38,5 @@ public class UserController {
         } else {
             return new Result(1, "用户名或密码不正确");
         }
-
     }
 }
