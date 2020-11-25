@@ -81,6 +81,7 @@ public class UserController {
         Result result = null;
         int isExist = userService.isExist(user);
         if (isExist == 0) {
+            user.setPower(0);
             user.setCreatedTime(new Date());
             int row = userService.register(user);
             if (row >= 1) {//表示成功
