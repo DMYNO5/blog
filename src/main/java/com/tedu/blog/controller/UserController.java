@@ -38,23 +38,38 @@ public class UserController {
 
     //贾旭业 //登陆验证，需post传入user对象
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Result login(@RequestBody User user) {
-        System.out.println(user);
-        String username = user.getUsername();
-        String password = user.getPassword();
-        User userDao = userService.selectUserByUserNameAndPassword(username, password);
-        if (userDao != null) {
-            System.out.println(userDao);
-            return new Result(0, "登陆成功", userDao);
-        } else {
-            return new Result(1, "用户名或密码不正确");
+    public Result login(String code,String key,@RequestBody User user,HttpServletRequest request) {
+        Result  result=new Result();
+        System.out.println(code);
+        //验证验证码
+        String keyCode = (String)request.getServletContext().getAttribute(key);
+        try {
+            if(code.equalsIgnoreCase(keyCode)){
+                System.out.println(user);
+                String username = user.getUsername();
+                String password = user.getPassword();
+                User userDao = userService.selectUserByUserNameAndPassword(username, password);
+                if (userDao != null) {
+                    System.out.println(userDao);
+                    return new Result(0, "登陆成功", userDao);
+                } else {
+                    return new Result(1, "用户名或密码不正确");
+                }
+            }
+            else{
+                throw new RuntimeException("验证码错误！！");
+            }
+        }catch (Exception e) {
+            // TODO: handle exception
+            e.printStackTrace();
+            result.setMsg(e.getMessage());
+            result.setState(1);
         }
-
+        return result;
     }
 
     //侯国萃   验证码
     @RequestMapping("/getImage")
-
     public Map<String, String> getImage(HttpServletRequest request) throws IOException {
         Map<String, String> result = new HashMap<>();
         CpachaUtil createImageCode = new CpachaUtil();
@@ -94,4 +109,24 @@ public class UserController {
         }
         return result;
     }
+
+    @RequestMapping("/updateUser")
+    public Result updateUser(Integer userId,String newName,String newPhone,String newEmail){
+        int row = userService.updateUserById(userId,newName,newPhone,newEmail);
+        if(row>=1){
+            return new Result(0,"修改成功");
+        }
+            return  new Result(1,"修改失败");
+    }
+
+    @RequestMapping("/updatePw")
+    public Result updatePw(Integer userId,String newPw){
+        int row = userService.updatePw(userId,newPw);
+        if(row>=1){
+            return new Result(0,"修改成功");
+        }
+        return  new Result(1,"修改失败");
+    }
 }
+
+

@@ -27,6 +27,8 @@ public class CollectionController {
         return pageResult;
     }
 
+
+
     //贾旭业/提交收藏/（需登陆校验）
     @RequestMapping("/insert")
     public Result insert(Collection collection){
@@ -39,6 +41,15 @@ public class CollectionController {
             }
         }else {
             return new Result(1,"请先登陆");
+        }
+    }
+
+    @RequestMapping("/delete")
+    public Result delete(Integer colId){
+        if(collectionService.delectById(colId)>=1){
+            return new Result(0,"删除成功");
+        }else {
+            return new Result(1,"删除失败");
         }
     }
 }
