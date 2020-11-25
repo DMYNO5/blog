@@ -61,4 +61,10 @@ public class CommentServiceImpl implements CommentService {
         return pageInfo;
     }
 
+    @Override
+    public Integer delete(Integer cId) {
+        Integer row = commentMapper.deleteByPrimaryKey(cId);
+        return row;
+    }
+
 }

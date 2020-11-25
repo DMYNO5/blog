@@ -1,8 +1,10 @@
 package com.tedu.blog.service;
 
 import com.github.pagehelper.PageInfo;
+import com.tedu.blog.pojo.Category;
 import com.tedu.blog.pojo.Comment;
 import com.tedu.blog.pojo.Essay;
+import com.tedu.blog.pojo.Label;
 
 import java.util.List;
 
@@ -15,8 +17,15 @@ public interface EssayService {
 
 
 
-    int insertEssay( Essay essay);
+    int insertEssay( Essay essay,Label label);
 
+    int deleteById(Integer essayId);
+
+    int update(Essay essay);
+
+    List<Category> selelctcategoryByEssayId(Integer essayId);
+
+    List<Label> selectLabelByEssayId(Integer essayId);
 
     public Essay selectEssayByEssayId(Integer essayId);
 

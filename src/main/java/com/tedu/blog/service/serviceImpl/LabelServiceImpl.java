@@ -5,16 +5,14 @@ import com.github.pagehelper.PageInfo;
 import com.tedu.blog.mapper.LabelMapper;
 import com.tedu.blog.pojo.Label;
 import com.tedu.blog.pojo.LabelExample;
-import com.tedu.blog.pojo.Result;
 import com.tedu.blog.service.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.ListResourceBundle;
+
 
 @Service
 public class LabelServiceImpl implements LabelService {

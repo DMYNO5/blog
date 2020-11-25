@@ -5,7 +5,6 @@ import com.tedu.blog.pojo.Label;
 import com.tedu.blog.pojo.PageResult;
 import com.tedu.blog.pojo.Result;
 import com.tedu.blog.service.serviceImpl.LabelServiceImpl;
-import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
