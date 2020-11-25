@@ -11,7 +11,6 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-
 public class CpachaUtil {
     // 图片的宽度。
     private int width = 100;
