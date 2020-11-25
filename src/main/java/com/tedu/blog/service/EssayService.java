@@ -17,6 +17,9 @@ public interface EssayService {
 
     int insertEssay( Essay essay);
 
+    int deleteById(Integer essayId);
+
+    int update(Essay essay);
 
     public Essay selectEssayByEssayId(Integer essayId);
 
