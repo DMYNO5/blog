@@ -25,6 +25,7 @@ public class UserController {
         return pageResult;
     }
 
+    //贾旭业 //登陆验证，需post传入user对象
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(@RequestBody User user) {
         System.out.println(user);

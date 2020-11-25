@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
         return pageInfo;
     }
 
+    //贾旭业
     @Override
     public User selectUserByUserNameAndPassword(String username, String password){
         UserExample example=new UserExample();

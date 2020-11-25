@@ -35,4 +35,13 @@ public class CollectionServiceImpl implements CollectionService {
         PageInfo pageInfo = new PageInfo(collectionList);
         return pageInfo;
     }
+
+    //贾
+    @Override
+    public Integer insert(Collection collection) {
+        Integer i = collectionMapper.insert(collection);
+        return i;
+    }
+
+
 }

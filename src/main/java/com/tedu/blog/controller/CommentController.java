@@ -1,5 +1,6 @@
 package com.tedu.blog.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.tedu.blog.pojo.Comment;
 import com.tedu.blog.pojo.PageResult;
 import com.tedu.blog.pojo.User;
@@ -26,6 +27,8 @@ public class CommentController {
         pageResult.setPageInfo(pageInfo);
         return pageResult;
     }
+
+    //贾旭业 /插入一条评论（校验登陆）
     @RequestMapping("/insert")
     public Result insert(Comment comment){
         Integer userId = comment.getUserId();

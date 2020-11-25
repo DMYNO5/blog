@@ -19,6 +19,7 @@ public interface EssayService {
 
 
     public Essay selectEssayByEssayId(Integer essayId);
+
     public List<Comment> selectCommentsByEssayId(Integer essayId);
     public List<Comment> selectCommentsByEssayId2(Integer essayId);
     public Integer insert(Comment comment);

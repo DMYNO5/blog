@@ -16,8 +16,6 @@ import org.springframework.util.StringUtils;
 public class CommentServiceImpl implements CommentService {
     @Autowired
     CommentMapper commentMapper;
-
-<<<<<<< HEAD
     @Autowired
     CommentMapper2 commentMapper2;
 
@@ -61,11 +59,5 @@ public class CommentServiceImpl implements CommentService {
         List<Comment> commentList = commentMapper.selectByExample(commentExample);
         PageInfo pageInfo = new PageInfo(commentList);
         return pageInfo;
-    }
-    @Override
-    public Integer insert(Comment comment) {
-        Integer i = commentMapper.insert(comment);
-        return i;
-
     }
 }
