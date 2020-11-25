@@ -21,23 +21,23 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PageInfo<User> selectByUser(Integer pageNum, Integer pageSize, User user) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         UserExample userExample = new UserExample();
-        UserExample.Criteria criteria=userExample.createCriteria();
-        if(!StringUtils.isEmpty(user.getUserId())){
+        UserExample.Criteria criteria = userExample.createCriteria();
+        if (!StringUtils.isEmpty(user.getUserId())) {
             criteria.andUserIdEqualTo(user.getUserId());
         }
-        if(!StringUtils.isEmpty(user.getUsername())){
+        if (!StringUtils.isEmpty(user.getUsername())) {
             criteria.andUsernameEqualTo(user.getUsername());
         }
-        if(!StringUtils.isEmpty(user.getEmail())){
+        if (!StringUtils.isEmpty(user.getEmail())) {
             criteria.andEmailEqualTo(user.getEmail());
         }
-        if(!StringUtils.isEmpty(user.getPower())){
+        if (!StringUtils.isEmpty(user.getPower())) {
             criteria.andPowerEqualTo(user.getPower());
         }
         List<User> userList = userMapper.selectByExample(userExample);
-        PageInfo pageInfo =new PageInfo(userList);
+        PageInfo pageInfo = new PageInfo(userList);
         return pageInfo;
     }
 
@@ -58,9 +58,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updateUser(Integer userId) {
+        return null;
+    }
+
+    @Override
     public Integer updateUserById(Integer userId, String newName, String newPhone, String newEmail) {
         User user = userMapper.selectByPrimaryKey(userId);
-        if(!(newName.equals(user.getUsername())&newPhone.equals(user.getPhone())&newEmail.equals(user.getEmail()))){
+        if (!(newName.equals(user.getUsername()) & newPhone.equals(user.getPhone()) & newEmail.equals(user.getEmail()))) {
             user.setUsername(newName);
             user.setPhone(newPhone);
             user.setEmail(newEmail);
@@ -71,11 +76,30 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer updatePw(Integer userId, String newPw) {
         User user = userMapper.selectByPrimaryKey(userId);
-        if(!newPw.equals(user.getPassword())){
+        if (!newPw.equals(user.getPassword())) {
             user.setPassword(newPw);
         }
         return userMapper.updateByPrimaryKey(user);
     }
 
+    @Override
+    public int register(User user) {
+
+        int row = userMapper.insertSelective(user);
+        return row;
+    }
+
+    public int isExist(User user) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.or();
+        criteria.andUsernameEqualTo(user.getUsername());
+        criteria.andPasswordEqualTo(user.getPassword());
+        List<User> userList = userMapper.selectByExample(userExample);
+        if (userList.size() == 0) {
+            return 0;//表示可注册
+        } else {
+            return 1;
+        }
+    }
 
 }
