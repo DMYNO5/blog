@@ -39,7 +39,6 @@ public class UserController {
     //贾旭业 //登陆验证，需post传入user对象
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result login(String code,String key,@RequestBody User user,HttpServletRequest request) {
-
         Result  result=new Result();
         System.out.println(code);
         //验证验证码
@@ -67,12 +66,10 @@ public class UserController {
             result.setState(1);
         }
         return result;
-
     }
 
     //侯国萃   验证码
     @RequestMapping("/getImage")
-
     public Map<String, String> getImage(HttpServletRequest request) throws IOException {
         Map<String, String> result = new HashMap<>();
         CpachaUtil createImageCode = new CpachaUtil();
