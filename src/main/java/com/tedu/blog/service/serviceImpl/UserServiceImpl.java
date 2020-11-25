@@ -4,12 +4,15 @@ package com.tedu.blog.service.serviceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tedu.blog.mapper.UserMapper;
+import com.tedu.blog.pojo.Result;
 import com.tedu.blog.pojo.User;
 import com.tedu.blog.pojo.UserExample;
 import com.tedu.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
@@ -40,24 +43,39 @@ public class UserServiceImpl implements UserService {
 
     //贾旭业
     @Override
-    public User selectUserByUserNameAndPassword(String username, String password){
-        UserExample example=new UserExample();
+    public User selectUserByUserNameAndPassword(String username, String password) {
+        UserExample example = new UserExample();
         UserExample.Criteria criteria = example.or();
         criteria.andUsernameEqualTo(username);
         criteria.andPasswordEqualTo(password);
         List<User> users = userMapper.selectByExample(example);
-        if(users.size()==1){
+        if (users.size() == 1) {
             User user = users.get(0);
             return user;
-        }else {
+        } else {
             return null;
         }
     }
 
     @Override
-    public User updateUser(Integer userId) {
+    public Integer updateUserById(Integer userId, String newName, String newPhone, String newEmail) {
         User user = userMapper.selectByPrimaryKey(userId);
-        return null;
+        if(!(newName.equals(user.getUsername())&newPhone.equals(user.getPhone())&newEmail.equals(user.getEmail()))){
+            user.setUsername(newName);
+            user.setPhone(newPhone);
+            user.setEmail(newEmail);
+        }
+        return userMapper.updateByPrimaryKey(user);
     }
+
+    @Override
+    public Integer updatePw(Integer userId, String newPw) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        if(!newPw.equals(user.getPassword())){
+            user.setPassword(newPw);
+        }
+        return userMapper.updateByPrimaryKey(user);
+    }
+
 
 }

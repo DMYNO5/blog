@@ -9,4 +9,5 @@ public interface CommentService {
     public List<Comment> selectCommentsByEssayId2(Integer essayId);
     public Integer insert(Comment comment);
     PageInfo<Comment> selectByComment(Integer pageNum, Integer pageSize, Comment comment);
+    public Integer delete(Integer cId);
 }

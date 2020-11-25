@@ -40,4 +40,22 @@ public class UserController {
         }
 
     }
+
+    @RequestMapping("/updateUser")
+    public Result updateUser(Integer userId,String newName,String newPhone,String newEmail){
+        int row = userService.updateUserById(userId,newName,newPhone,newEmail);
+        if(row>=1){
+            return new Result(0,"修改成功");
+        }
+            return  new Result(1,"修改失败");
+    }
+
+    @RequestMapping("/updatePw")
+    public Result updatePw(Integer userId,String newPw){
+        int row = userService.updatePw(userId,newPw);
+        if(row>=1){
+            return new Result(0,"修改成功");
+        }
+        return  new Result(1,"修改失败");
+    }
 }
