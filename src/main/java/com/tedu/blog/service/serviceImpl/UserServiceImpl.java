@@ -4,6 +4,7 @@ package com.tedu.blog.service.serviceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tedu.blog.mapper.UserMapper;
+import com.tedu.blog.pojo.Result;
 import com.tedu.blog.pojo.User;
 import com.tedu.blog.pojo.UserExample;
 import com.tedu.blog.service.UserService;
@@ -60,4 +61,23 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+    public int register(User user) {
+
+        int row=userMapper.insertSelective(user);
+         return   row;
+    }
+public int isExist(User user){
+    UserExample  userExample=new UserExample();
+    UserExample.Criteria criteria=userExample.or();
+    criteria.andUsernameEqualTo(user.getUsername());
+    criteria.andPasswordEqualTo(user.getPassword());
+    List<User>   userList=userMapper.selectByExample(userExample);
+    if(userList.size()==0){
+        return 0;//表示可注册
+    }
+    else{
+        return  1;
+    }
+}
 }
