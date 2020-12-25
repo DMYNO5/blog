@@ -36,8 +36,8 @@ public class LabelServiceImpl implements LabelService {
     }
 
     //删除
-    public int deleteById(Integer LabelId) {
-        int row = labelMapper.deleteByPrimaryKey(LabelId);
+    public int deleteById(Integer id) {
+        int row = labelMapper.deleteByPrimaryKey(id);
         return row;
     }
 
@@ -62,6 +62,17 @@ public class LabelServiceImpl implements LabelService {
         } else if (!StringUtils.isEmpty(label.getDescribed())) {
             criteria.andDescribedEqualTo(label.getDescribed());
         }
+        List<Label> labelList = labelMapper.selectByExample(labelExample);
+        PageInfo pageInfo = new PageInfo(labelList);
+        return pageInfo;
+    }
+
+    //根据描述查找label
+    public PageInfo<Label> selectByDescribed(String described, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        LabelExample labelExample = new LabelExample();
+        LabelExample.Criteria criteria = labelExample.or();
+        criteria.andDescribedEqualTo(described);
         List<Label> labelList = labelMapper.selectByExample(labelExample);
         PageInfo pageInfo = new PageInfo(labelList);
         return pageInfo;

@@ -14,8 +14,7 @@ public interface EssayService {
     PageInfo<Essay> selectByEssay(Integer pageNum, Integer pageSize, Essay essay);
 
 
-
-    int insertEssay( Essay essay);
+    int insertEssay(Essay essay);
 
     int deleteById(Integer essayId);
 
@@ -24,7 +23,10 @@ public interface EssayService {
     public Essay selectEssayByEssayId(Integer essayId);
 
     public List<Comment> selectCommentsByEssayId(Integer essayId);
+
     public List<Comment> selectCommentsByEssayId2(Integer essayId);
+
     public Integer insert(Comment comment);
 
+    public PageInfo<Essay> selectByPower(Integer pageNum, Integer pageSize, Essay essay);
 }

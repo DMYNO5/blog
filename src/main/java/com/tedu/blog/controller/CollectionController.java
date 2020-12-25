@@ -19,26 +19,37 @@ import java.util.List;
 public class CollectionController {
     @Autowired
     CollectionService collectionService;
+
     @RequestMapping("/selectByCollection")
-    public PageResult selectByCollection(Integer pageNum, Integer pageSize, Collection collection){
-        PageInfo pageInfo = collectionService.selectByCollection(1,10,collection);
-        PageResult pageResult = new PageResult(0,"ok");
+    public PageResult selectByCollection(Integer pageNum, Integer pageSize, Collection collection) {
+        PageInfo pageInfo = collectionService.selectByCollection(1, 10, collection);
+        PageResult pageResult = new PageResult(0, "ok");
         pageResult.setPageInfo(pageInfo);
         return pageResult;
     }
 
     //贾旭业/提交收藏/（需登陆校验）
     @RequestMapping("/insert")
-    public Result insert(Collection collection){
-        if (collection.getUserId()!=null){
+    public Result insert(Collection collection) {
+        if (collection.getUserId() != null) {
             Integer i = collectionService.insert(collection);
-            if (i==1){
-                return new Result(0,"收藏成功");
-            }else{
-                return new Result(1,"收藏失败");
+            if (i == 1) {
+                return new Result(0, "收藏成功");
+            } else {
+                return new Result(1, "收藏失败");
             }
-        }else {
-            return new Result(1,"请先登陆");
+        } else {
+            return new Result(1, "请先登陆");
         }
+    }
+
+    //删除收藏
+    @RequestMapping("/deleteByColId")
+    public Result deleteByColId(Integer colId) {
+        int row = collectionService.deleteByColId(colId);
+        if (row >= 1) {
+            return new Result(0, "ok");
+        }
+        return new Result(1, "删除失败");
     }
 }

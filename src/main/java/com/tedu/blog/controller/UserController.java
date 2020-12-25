@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.tedu.blog.pojo.PageResult;
 import com.tedu.blog.pojo.User;
 import com.tedu.blog.service.UserService;
+import com.tedu.blog.service.serviceImpl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,5 +40,15 @@ public class UserController {
             return new Result(1, "用户名或密码不正确");
         }
 
+    }
+
+    //删除用户
+    @RequestMapping("/deleteByUserId")
+    public Result deleteById(Integer userId) {
+        int row = userService.deleteByUserId(userId);
+        if (row >= 1) {
+            return new Result(0, "ok");
+        }
+        return new Result(1, "删除失败");
     }
 }
