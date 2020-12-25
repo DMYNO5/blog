@@ -23,23 +23,23 @@ public class CommentServiceImpl implements CommentService {
     CommentMapper2 commentMapper2;
 
     //贾旭业。根据essayId查出评论对象的list集合
-    public List<Comment> selectCommentsByEssayId(Integer essayId) {
-        CommentExample example = new CommentExample();
-        CommentExample.Criteria criteria = example.or();
+    public List<Comment> selectCommentsByEssayId(Integer essayId){
+        CommentExample example=new CommentExample();
+        CommentExample.Criteria criteria=example.or();
         criteria.andEssayIdEqualTo(essayId);
         List<Comment> ListComment = commentMapper.selectByExample(example);
         return ListComment;
     }
 
     //贾旭业。根据essayId查出评论对象的list集合//两表联查
-    public List<Comment> selectCommentsByEssayId2(Integer essayId) {
+    public List<Comment> selectCommentsByEssayId2(Integer essayId){
         List<Comment> commentList = commentMapper2.selectCommentsByEssayId2(essayId);
         return commentList;
     }
 
     //贾旭业。向评论表插入一条评论
-    public Integer insert(Comment comment) {
-        Date date = new Date();
+    public Integer insert(Comment comment){
+        Date date=new Date();
         comment.setCreatedTime(date);
         Integer i = commentMapper.insert(comment);
         return i;
@@ -67,6 +67,12 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int deleteByCId(Integer cId) {
         int row = commentMapper.deleteByPrimaryKey(cId);
+        return row;
+    }
+
+    @Override
+    public Integer delete(Integer cId) {
+        Integer row = commentMapper.deleteByPrimaryKey(cId);
         return row;
     }
 

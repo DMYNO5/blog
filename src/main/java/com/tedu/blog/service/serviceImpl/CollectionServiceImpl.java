@@ -19,16 +19,16 @@ public class CollectionServiceImpl implements CollectionService {
 
     @Override
     public PageInfo<Collection> selectByCollection(Integer pageNum, Integer pageSize, Collection collection) {
-        PageHelper.startPage(pageNum, pageSize);
-        CollectionExample collectionExample = new CollectionExample();
+        PageHelper.startPage(pageNum,pageSize);
+        CollectionExample collectionExample= new CollectionExample();
         CollectionExample.Criteria criteria = collectionExample.createCriteria();
-        if (!StringUtils.isEmpty(collection.getColId())) {
+        if(!StringUtils.isEmpty(collection.getColId())){
             criteria.andColIdEqualTo(collection.getColId());
         }
-        if (!StringUtils.isEmpty(collection.getUserId())) {
+        if (!StringUtils.isEmpty(collection.getUserId())){
             criteria.andUserIdEqualTo(collection.getUserId());
         }
-        if (!StringUtils.isEmpty(collection.getEssayId())) {
+        if (!StringUtils.isEmpty(collection.getEssayId())){
             criteria.andEssayIdEqualTo(collection.getEssayId());
         }
         List<Collection> collectionList = collectionMapper.selectByExample(collectionExample);
@@ -46,6 +46,12 @@ public class CollectionServiceImpl implements CollectionService {
     @Override
     public int deleteByColId(Integer colId) {
         int row = collectionMapper.deleteByPrimaryKey(colId);
+        return row;
+    }
+
+    @Override
+    public Integer delectById(Integer colId) {
+        Integer row = collectionMapper.deleteByPrimaryKey(colId);
         return row;
     }
 

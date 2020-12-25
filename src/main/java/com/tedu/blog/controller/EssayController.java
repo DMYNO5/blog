@@ -1,10 +1,7 @@
 package com.tedu.blog.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.tedu.blog.pojo.Comment;
-import com.tedu.blog.pojo.Essay;
-import com.tedu.blog.pojo.PageResult;
-import com.tedu.blog.pojo.Result;
+import com.tedu.blog.pojo.*;
 import com.tedu.blog.service.EssayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,17 +21,17 @@ public class EssayController {
     EssayService essayService;
 
     @RequestMapping("/listAllEssay")
-    public PageResult listAllEssay(Integer pageNum, Integer pageSize) {
+    public PageResult listAllEssay(Integer pageNum, Integer pageSize){
         PageInfo pageInfo = essayService.selectPage(pageNum, pageSize);
-        PageResult pageResult = new PageResult(0, "ok");
+        PageResult pageResult = new PageResult(0,"ok");
         pageResult.setPageInfo(pageInfo);
         return pageResult;
     }
 
     @RequestMapping("/selectByTitle")
-    public PageResult selectByTitle(Integer pageNum, Integer pageSize, Essay essay) {
+    public PageResult selectByTitle(Integer pageNum, Integer pageSize, Essay essay){
         PageInfo pageInfo = essayService.selectByTitle(1, 10, essay);
-        PageResult pageResult = new PageResult(0, "ok");
+        PageResult pageResult = new PageResult(0,"ok");
         pageResult.setPageInfo(pageInfo);
         return pageResult;
 
@@ -55,16 +53,16 @@ public class EssayController {
         return pageResult;
     }
 
+
     /**
      * 赵飞宇      新增文章的方法
-     *
      * @param essay
      * @return result
      */
     @RequestMapping("/insertEssay")
-    public Result insertEssay(Essay essay) {
+    public Result insertEssay( Essay essay,Label label) {
         Result result = null;
-        int hangshu = essayService.insertEssay(essay);
+        int hangshu = essayService.insertEssay(essay,label);
         if (hangshu > 0) {
             result = new Result(0, "成功添加一篇文章", essay);
         }
@@ -76,51 +74,79 @@ public class EssayController {
 
     /**
      * 赵飞宇      通过文章的id删除文章的方法
-     *
      * @param essayId
      * @return result
      */
     @RequestMapping("/deleteById")
-    public Result deleteById(Integer essayId) {
+    public  Result deleteById(Integer essayId){
         Result result = null;
-        int hangshu = essayService.deleteById(essayId);
-        if (hangshu > 0) {
-            result = new Result(0, "成功删除一篇文章", essayId);
-        }
-        if (hangshu == 0) {
-            result = new Result(500, "删除失败");
-        }
+        int hangshu =essayService.deleteById(essayId);
+    if(hangshu>0){
+        result = new Result(0,"成功删除一篇文章",essayId);
+    }
+    if(hangshu==0){
+        result = new Result(500,"删除失败");
+    }
 
-        return result;
+        return  result;
     }
 
 
     /**
      * 赵飞宇      更新文章
-     *
      * @param essay
      * @return result
      */
     @RequestMapping("updateEssay")
-    public Result updateEssay(Essay essay) {
+    public  Result updateEssay(Essay essay){
         Result result = null;
-        int hangshu = essayService.update(essay);
-        if (hangshu > 0) {
-            result = new Result(0, "成功修改一篇文章", essay);
+        int hangshu =essayService.update(essay);
+        if(hangshu>0){
+            result = new Result(0,"成功修改一篇文章",essay);
         }
-        if (hangshu == 0) {
-            result = new Result(500, "修改失败");
+        if(hangshu==0){
+            result = new Result(500,"修改失败");
         }
 
-        return result;
+        return  result;
+    }
+
+    /**
+     * 赵飞宇      根据essayId查到分类的描述
+     * @param essayId
+     * @return
+     */
+    @RequestMapping("/selelctcategoryByEssayId")
+    public List<String> selelctcategoryByEssayId(Integer essayId){
+        List<Category> categories = essayService.selelctcategoryByEssayId(essayId);
+        List<String> desc =new ArrayList<>();
+        for (Category category:categories){
+            desc.add(category.getDescribed());
+        }
+        return desc;
+    }
+
+    /**
+     * 赵飞宇      根据essayId查到标签的描述
+     * @param essayId
+     * @return
+     */
+    @RequestMapping("/selectLabelByEssayId")
+    public  List<String> selectLabelByEssayId(Integer essayId){
+        List<Label> labels = essayService.selectLabelByEssayId(essayId);
+        List<String> desc =new ArrayList<>();
+        for (Label label:labels){
+            desc.add(label.getDescribed());
+        }
+        return desc;
     }
 
 
     //贾旭业。根据essayId查出文章对象
     @RequestMapping("/selectEssayByEssayId")
-    public Result selectByEssayId(Integer essayId) {
+    public Result selectByEssayId(Integer essayId){
         Essay essay = essayService.selectEssayByEssayId(essayId);
-        return new Result(0, "ok", essay);
+        return new Result(0,"ok",essay);
     }
 
 

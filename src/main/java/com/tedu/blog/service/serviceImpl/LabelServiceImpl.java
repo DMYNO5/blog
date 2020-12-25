@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.tedu.blog.mapper.LabelMapper;
 import com.tedu.blog.pojo.Label;
 import com.tedu.blog.pojo.LabelExample;
-
 import com.tedu.blog.service.LabelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

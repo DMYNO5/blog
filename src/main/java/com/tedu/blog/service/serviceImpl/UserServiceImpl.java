@@ -4,6 +4,7 @@ package com.tedu.blog.service.serviceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.tedu.blog.mapper.UserMapper;
+import com.tedu.blog.pojo.Result;
 import com.tedu.blog.pojo.Label;
 import com.tedu.blog.pojo.User;
 import com.tedu.blog.pojo.UserExample;
@@ -11,9 +12,9 @@ import com.tedu.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
-
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired(required = false)
@@ -21,17 +22,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public PageInfo<User> selectByUser(Integer pageNum, Integer pageSize, User user) {
-        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.startPage(pageNum,pageSize);
         UserExample userExample = new UserExample();
-        UserExample.Criteria criteria = userExample.createCriteria();
-        if (!StringUtils.isEmpty(user.getUserId())) {
+        UserExample.Criteria criteria=userExample.createCriteria();
+        if(!StringUtils.isEmpty(user.getUserId())){
             criteria.andUserIdEqualTo(user.getUserId());
         }
-        if (!StringUtils.isEmpty(user.getUsername())) {
+        if(!StringUtils.isEmpty(user.getUsername())){
             criteria.andUsernameEqualTo(user.getUsername());
-        }
-        if (!StringUtils.isEmpty(user.getPhone())) {
-            criteria.andPhoneEqualTo(user.getPhone());
         }
         if (!StringUtils.isEmpty(user.getEmail())) {
             criteria.andEmailEqualTo(user.getEmail());
@@ -62,8 +60,47 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updateUser(Integer userId) {
-        User user = userMapper.selectByPrimaryKey(userId);
         return null;
+    }
+
+    @Override
+    public Integer updateUserById(Integer userId, String newName, String newPhone, String newEmail) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        if (!(newName.equals(user.getUsername()) & newPhone.equals(user.getPhone()) & newEmail.equals(user.getEmail()))) {
+            user.setUsername(newName);
+            user.setPhone(newPhone);
+            user.setEmail(newEmail);
+        }
+        return userMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
+    public Integer updatePw(Integer userId, String newPw) {
+        User user = userMapper.selectByPrimaryKey(userId);
+        if (!newPw.equals(user.getPassword())) {
+            user.setPassword(newPw);
+        }
+        return userMapper.updateByPrimaryKey(user);
+    }
+
+    @Override
+    public int register(User user) {
+
+        int row = userMapper.insertSelective(user);
+        return row;
+    }
+
+    public int isExist(User user) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.or();
+        criteria.andUsernameEqualTo(user.getUsername());
+        criteria.andPasswordEqualTo(user.getPassword());
+        List<User> userList = userMapper.selectByExample(userExample);
+        if (userList.size() == 0) {
+            return 0;//表示可注册
+        } else {
+            return 1;
+        }
     }
 
     @Override

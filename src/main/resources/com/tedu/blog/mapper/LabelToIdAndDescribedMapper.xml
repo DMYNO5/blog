@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tedu.blog.mapper.LabelToIdAndDescribedMapper">
+    <resultMap id="BaseResultMap" type="com.tedu.blog.pojo.Label">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="label_id" jdbcType="INTEGER" property="labelId"/>
+        <result column="essay_id" jdbcType="INTEGER" property="essayId"/>
+        <result column="described" jdbcType="VARCHAR" property="described"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <select id="selectToDescribed" resultMap="BaseResultMap">
+        select DISTINCT label_id,described from label;
+    </select>
+    <select id="selectToId" resultMap="BaseResultMap">
+        select essay_id
+        from label where label_id=#{label_id}
+    </select>
+</mapper>

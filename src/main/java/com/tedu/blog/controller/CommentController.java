@@ -69,4 +69,13 @@ public class CommentController {
         }
         return new Result(1, "删除失败");
     }
+
+    @RequestMapping("/delete")
+    public Result deleteComment(Integer cId){
+        if(commentService.delete(cId)>=1){
+            return new Result(0,"删除成功");
+        }else {
+            return  new Result(1,"删除失败");
+        }
+    }
 }
