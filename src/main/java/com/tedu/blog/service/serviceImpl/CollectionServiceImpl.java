@@ -43,5 +43,11 @@ public class CollectionServiceImpl implements CollectionService {
         return i;
     }
 
+    @Override
+    public Integer delectById(Integer colId) {
+        Integer row = collectionMapper.deleteByPrimaryKey(colId);
+        return row;
+    }
+
 
 }

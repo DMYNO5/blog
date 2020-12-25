@@ -58,4 +58,13 @@ public class CommentController {
         List<Comment> commentList = commentService.selectCommentsByEssayId2(essayId);
         return new Result(0,"ok",commentList);
     }
+
+    @RequestMapping("/delete")
+    public Result deleteComment(Integer cId){
+        if(commentService.delete(cId)>=1){
+            return new Result(0,"删除成功");
+        }else {
+            return  new Result(1,"删除失败");
+        }
+    }
 }

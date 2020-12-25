@@ -7,4 +7,5 @@ import com.tedu.blog.pojo.Comment;
 public interface CollectionService {
     PageInfo<Collection> selectByCollection(Integer pageNum, Integer pageSize, Collection collection);
     public Integer insert(Collection collection);
+    public Integer delectById(Integer colId);
 }
